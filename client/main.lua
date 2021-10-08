@@ -7,6 +7,18 @@ PlayerJob = {}
 onDuty = false
 databankOpen = false
 
+-- qb-target event
+-- Functions/Events
+RegisterNetEvent('Toggle:Duty')
+AddEventHandler('Toggle:Duty', function()
+    onDuty = not onDuty
+    TriggerServerEvent("police:server:UpdateCurrentCops")
+    TriggerServerEvent("QBCore:ToggleDuty")
+    TriggerServerEvent("police:server:UpdateBlips")
+    TriggerEvent('qb-policealerts:ToggleDuty', onDuty)
+end)
+
+
 Citizen.CreateThread(function()
     for k, station in pairs(Config.Locations["stations"]) do
         local blip = AddBlipForCoord(station.coords.x, station.coords.y, station.coords.z)
