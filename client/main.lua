@@ -18,14 +18,15 @@ AddEventHandler('Toggle:Duty', function()
     TriggerServerEvent("police:server:UpdateCurrentCops")
     TriggerServerEvent("QBCore:ToggleDuty")
     TriggerServerEvent("police:server:UpdateBlips")
-    TriggerEvent('qb-policealerts:ToggleDuty', onDuty)
+    -- TriggerEvent('qb-policealerts:ToggleDuty', onDuty)
 end)
-
 
 Citizen.CreateThread(function()
     for k, station in pairs(Config.Locations["stations"]) do
         local blip = AddBlipForCoord(station.coords.x, station.coords.y, station.coords.z)
         SetBlipSprite(blip, 60)
+    end
+end)
 -- Functions
 
 local function CreateDutyBlips(playerId, playerLabel, playerJob, playerLocation)
